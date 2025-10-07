@@ -1,0 +1,47 @@
+In this part of my project, I used the Excel Process Scope. This creates a controlled environment where all Excel activities can run smoothly without leaving background processes open.
+
+Inside the scope, I used the Use Excel File activity. Here, I selected my Excel file which contains the meeting details such as participant names and their preferred time slots.
+
+I set the reference name as ‘Excel’ so I can call it easily in later steps. I also enabled the option to save changes, so any updates made by the workflow will be saved back into the file automatically. The option create if not exists ensures that if the file is missing, UiPath will create a new one.
+
+This setup forms the base for my automation, because all the participant data is stored and read from this Excel file. The next steps use this data to schedule meetings and send invites.”
+
+
+
+
+After opening the Excel file, the next step is to read the meeting details. For this, I used the Read Range activity.
+
+Here, I specified the sheet name as Sheet1, since that’s where the participant information is stored. I also enabled the option Has headers, so the workflow understands that the first row contains column names like Name, Email, and Preferred Time.
+
+I selected Visible rows only, which means it will only read the data that is not hidden in the sheet.
+
+Finally, I saved the output to a variable called meetingData. This variable now holds the entire participant list and their availability, which I will use in the next steps to schedule the meetings automatically.
+
+
+
+Once the meeting data is read into the variable meetingData, I loop through each row to extract the required information.
+
+For every row, I used Assign activities to separate the details into individual variables:
+
+The participant’s name is stored in the variable name.
+
+Their email address goes into the variable email.
+
+The date of the meeting is stored in the variable dates.
+
+The time is stored in the variable time.
+
+And finally, the agenda of the meeting is stored in the variable agenda.
+
+By breaking the data into these variables, it becomes much easier to use them later while preparing and sending meeting invitations automatically.
+
+
+Finally, I used the Send SMTP Email activity to automatically send the meeting invitations.
+
+Here, the recipient’s email is taken from the variable email, so each participant receives their own invite.
+The subject of the email is set to the agenda, making it clear what the meeting is about.
+For the body, I personalized the message by starting with the participant’s name and then adding the meeting details like date and time.
+
+UiPath then connects to my Gmail account using the configured SMTP settings and sends the email instantly.
+
+This ensures that every participant receives an accurate and personalized meeting invitation without any manual effort

@@ -1,0 +1,26 @@
+import java.util.Scanner;
+public class Check
+	{
+	static void age(int age)
+		{
+			if ( age >= 18)
+			{
+				System.out.println("Access Granted");
+			}
+			else
+			{
+				System.out.println("Access Denied!");
+			}
+		}
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		{
+			int num;
+			System.out.println("Enter the age :");
+			num = sc.nextInt();
+
+			age(num);
+		}	
+	}
+   }
